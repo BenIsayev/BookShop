@@ -83,10 +83,10 @@ function onCloseModal() {
 function onReadClick(id) {
     var book = getBookById(id)
     document.querySelector('.modal-header .title').innerText = book.name;
-    document.querySelector('.modal-body .img').innerHTML = `<img src="${book.imgUrl}">`;
+    document.querySelector('.modal-body .img').innerHTML = `<img style="height:100px" src="${book.imgUrl}">`;
     document.querySelector('.modal-body .content').innerText = book.content;
     document.querySelector('.modal-body span.rate').innerText = book.rate;
-    document.querySelector('.modal-body .rating').innerHTML = `<button class="btn btn-primary" onclick="onUpdateRating('${book.id}', -1)">-</button><span class="rate">  ${book.rate}  </span><button class="btn btn-primary" onclick="onUpdateRating('${book.id}', 1)">+</button>`;
+    document.querySelector('.modal-body .rating').innerHTML = `<button class="btn-sm btn-primary" onclick="onUpdateRating('${book.id}', -1)">-</button><span class="rate">  ${book.rate}  </span><button class="btn-sm btn-primary" onclick="onUpdateRating('${book.id}', 1)">+</button>`;
     // document.querySelector('.details-conteiner-father').classList.toggle('collapse')
 }
 
