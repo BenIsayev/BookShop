@@ -22,15 +22,6 @@ function addBook(name, price) {
     _saveBooksToStorage();
 }
 
-// Should be in controller
-function setPageBtnsHTMLs() {
-    var strHTMLs = ''
-
-    for (var i = 0; i < gPageCount; i++) {
-        strHTMLs += `<button class="page-${i}" onclick="onSetPage(${i})">${(i + 1)}</button>`
-    }
-    return strHTMLs
-}
 
 function setPage(target) {
     if (target === 'prev') {

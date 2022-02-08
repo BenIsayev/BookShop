@@ -17,13 +17,13 @@ function renderBooks() {
         //document.querySelector('.main-table').style.display = 'table'
     var strHTMLs = books.map(book => {
         return `<tr>
-            <td>${book.id}</td>
-            <td>${book.name}</td>
-            <td>${book.price}</td>
-            <td>
-            <button data-trans="read-book" class="button" onclick="onReadClick('${book.id}')">${getTrans('read-book')}</button>
-            <button data-trans="update-book" class="button" onclick="onUpdateClick('${book.id}')">${getTrans('update-book')}</button>
-            <button data-trans="delete-book" class="button" onclick="onDeleteClick('${book.id}')">${getTrans('delete-book')}</button>
+            <td class="border-end">${book.id}</td>
+            <td class="border-end">${book.name}</td>
+            <td class="border-end">${book.price}</td>
+            <td class="border-end">
+            <button data-trans="read-book" class="button btn btn-primary" onclick="onReadClick('${book.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">${getTrans('read-book')}</button>
+            <button data-trans="update-book" class="button btn btn-primary" onclick="onUpdateClick('${book.id}')">${getTrans('update-book')}</button>
+            <button data-trans="delete-book" class="button btn btn-primary" onclick="onDeleteClick('${book.id}')">${getTrans('delete-book')}</button>
             </td>
             <td>${book.rate}</td>
         </tr>`
@@ -32,18 +32,23 @@ function renderBooks() {
 
 }
 
+function setPageBtnsHTMLs() {
+    var strHTMLs = ''
+    for (var i = 0; i < gPageCount; i++) {
+        var buttonSize = (i === gPageIdx) ? 'btn-lg' : 'btn-sm'
+        strHTMLs += `<button class="page-${i} ${buttonSize} btn-primary m-2" onclick="onSetPage(${i})">${(i + 1)}</button>`
+    }
+    return strHTMLs
+}
+
 function renderPageBtns() {
     var strHTMLs = setPageBtnsHTMLs();
     var elNextBtn = document.querySelector('.next-page');
     var elPrevBtn = document.querySelector('.prev-page');
-    elNextBtn.classList.remove('faded');
-    elPrevBtn.classList.remove('faded');
-    if (gPageIdx === 0) elPrevBtn.classList.add('faded');
-    if (gPageIdx === gPageCount - 1) elNextBtn.classList.add('faded');
 
     document.querySelector('.page-numbers').innerHTML = strHTMLs
     var elCurrPageBtn = document.querySelector(`.page-${gPageIdx}`)
-    elCurrPageBtn.classList.add('curr-page')
+        // elCurrPageBtn.classList.add('btn-lg')
 }
 
 
@@ -72,17 +77,17 @@ function onUpdateRating(bookId, val) {
 
 function onCloseModal() {
     // renderBooks();
-    document.querySelector('.details-container').classList.add('hide')
+    document.querySelector('.details-conteiner-father').classList.add('collapse')
 }
 
 function onReadClick(id) {
     var book = getBookById(id)
-    document.querySelector('h3.book-name').innerText = book.name;
-    document.querySelector('.details-container .img').innerHTML = `<img src="${book.imgUrl}">`;
-    document.querySelector('div.content').innerText = book.content;
-    document.querySelector('span.rate').innerText = book.rate;
-    document.querySelector('div.rating').innerHTML = `<button onclick="onUpdateRating('${book.id}', -1)">-</button><span class="rate">  ${book.rate}  </span><button onclick="onUpdateRating('${book.id}', 1)">+</button>`;
-    document.querySelector('.details-container').classList.toggle('hide')
+    document.querySelector('.modal-header .title').innerText = book.name;
+    document.querySelector('.modal-body .img').innerHTML = `<img src="${book.imgUrl}">`;
+    document.querySelector('.modal-body .content').innerText = book.content;
+    document.querySelector('.modal-body span.rate').innerText = book.rate;
+    document.querySelector('.modal-body .rating').innerHTML = `<button class="btn btn-primary" onclick="onUpdateRating('${book.id}', -1)">-</button><span class="rate">  ${book.rate}  </span><button class="btn btn-primary" onclick="onUpdateRating('${book.id}', 1)">+</button>`;
+    // document.querySelector('.details-conteiner-father').classList.toggle('collapse')
 }
 
 function onUpdateClick(id) {
@@ -99,13 +104,13 @@ function onDeleteClick(id) {
 }
 
 function onAddBookClick() {
-    var elBookAdding = document.querySelector('.book-adding');
+    var elBookAdding = document.querySelector('.book-adding-section');
     elBookAdding.classList.toggle('collapse')
     renderPageBtns();
 }
 
 function onAddBook() {
-    var elBookAdding = document.querySelector('.book-adding');
+    var elBookAdding = document.querySelector('.book-adding-section');
     var elBookName = document.querySelector('input[name=book-name]');
     var elBookPrice = document.querySelector('input[name=book-price]');
     var bookName = elBookName.value.trim();
@@ -120,5 +125,7 @@ function onAddBook() {
 
 function onSetLang(lang) {
     setLang(lang);
+    if (lang === 'he') document.body.style.direction = 'rtl';
+    else document.body.style.direction = 'ltr'
     doTrans();
 }
