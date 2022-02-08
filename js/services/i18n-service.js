@@ -62,9 +62,17 @@ var gTrans = {
     'close-modal-btn': {
         en: 'Close',
         he: 'סגור'
+    },
+    currency: {
+        en: '$',
+        he: '₪'
     }
 }
 
+var gCurrencies = {
+    en: 'USD',
+    he: 'ILS'
+}
 
 function setLang(lang) {
     gCurrLang = lang;

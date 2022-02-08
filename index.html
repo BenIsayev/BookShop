@@ -12,9 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital@1&display=swap" rel="stylesheet">
 </head>
 
-<body style="background-image: url(img/bookshopbg.jpeg); background-repeat: no-repeat; background-size: cover;" onload="init()">
+<body style="background-image: url(img/bookshopbg1.jpeg); background-repeat: no-repeat; background-size:cover;" onload="init()">
 
-    <!-- select language -->
 
     <!-- The whole page -->
 
@@ -55,8 +54,7 @@
         </div>
     </div>
 
-    <div class="content-conatiner container d-flex flex-column col-6 align-items-center">
-
+    <div class="content-conatiner container d-flex flex-column col-8 align-items-center">
 
         <button data-trans="add-book-btn" class="add-book-btn btn btn-primary mb-1" onclick="onAddBookClick() ">Add a book</button>
         <section class="book-adding-section collapse">
@@ -67,12 +65,12 @@
             </section>
         </section>
 
-        <table class="main-table table table-striped border bg-light col-10">
+        <table class="main-table table container-lg table-striped border bg-light">
             <thead>
                 <th data-trans="id" class="border-end">ID</th>
                 <th data-trans="title" class="sort-toggle border-end col-4" title="Sort list by title " onclick="onSortList( 'title') ">Title</th>
                 <th data-trans="price" class="sort-toggle border-end" title="Sort list by price " onclick="onSortList( 'price') ">Price</th>
-                <th data-trans="actions" class="border-end">Actions</th>
+                <th data-trans="actions" class="border-end" style="text-align:center">Actions</th>
                 <th data-trans="rating" class="border-end">Rating</th>
             </thead>
             <tbody class="table-content"></tbody>

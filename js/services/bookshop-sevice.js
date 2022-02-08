@@ -6,6 +6,7 @@ const STORAGE_KEY = 'gBooks'
 var gPageIdx = 0;
 var gBooks = _createBooks();
 var gPageCount;
+var gSortDir = 1;
 _saveBooksToStorage();
 
 
@@ -49,13 +50,14 @@ function setNextPage() {
 }
 
 function sortList(sortBy) {
+    gSortDir *= -1;
+    console.log(gSortDir)
     if (sortBy === 'title') {
         gBooks.sort((b1, b2) => {
-            if (b2.name.toUpperCase() > b1.name.toUpperCase()) return 1;
-            else return -1;
+            return ((b2.name.toUpperCase() > b1.name.toUpperCase()) ? 1 : -1) * gSortDir;
         })
     } else if (sortBy === 'price') {
-        gBooks.sort((b1, b2) => { return parseInt(b1.price) - parseInt(b2.price) })
+        gBooks.sort((b1, b2) => { return (parseInt(b1.price) - parseInt(b2.price)) * gSortDir })
     }
     _saveBooksToStorage;
 }
@@ -73,7 +75,7 @@ function getBookById(id) {
 
 function updateBookPrice(id, price) {
     var book = gBooks.find(book => id === book.id);
-    book.price = price + '$';
+    book.price = price;
     _saveBooksToStorage();
 }
 
@@ -104,7 +106,7 @@ function _createBook() {
     return {
         id: makeId(3),
         name: makeLorem(2),
-        price: getRandomIntInclusive(0, 100) + '$',
+        price: getRandomIntInclusive(0, 100),
         content: makeLorem(),
         imgUrl: 'img/book.png',
         rate: 0

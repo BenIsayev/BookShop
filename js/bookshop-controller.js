@@ -19,11 +19,11 @@ function renderBooks() {
         return `<tr>
             <td class="border-end">${book.id}</td>
             <td class="border-end">${book.name}</td>
-            <td class="border-end">${book.price}</td>
-            <td class="border-end">
-            <button data-trans="read-book" class="button btn btn-primary" onclick="onReadClick('${book.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">${getTrans('read-book')}</button>
-            <button data-trans="update-book" class="button btn btn-primary" onclick="onUpdateClick('${book.id}')">${getTrans('update-book')}</button>
-            <button data-trans="delete-book" class="button btn btn-primary" onclick="onDeleteClick('${book.id}')">${getTrans('delete-book')}</button>
+            <td class="border-end">${book.price} <span data-trans="currency">${getTrans('currency')}</span></td>
+            <td class="border-end d-flex justify-content-around">
+            <button data-trans="read-book" class="button btn-sm btn-success float-end" onclick="onReadClick('${book.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">${getTrans('read-book')}</button>
+            <button data-trans="update-book" class="button btn-sm btn-primary" onclick="onUpdateClick('${book.id}')">${getTrans('update-book')}</button>
+            <button data-trans="delete-book" class="button btn-sm btn-danger" onclick="onDeleteClick('${book.id}')">${getTrans('delete-book')}</button>
             </td>
             <td>${book.rate}</td>
         </tr>`
